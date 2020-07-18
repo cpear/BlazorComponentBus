@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>BlazorComponentBus</id>
+    <version>1.0.1</version>
+    <authors>Colin Pear</authors>
+    <owners>Colin Pear</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <projectUrl>https://github.com/cpear/BlazorComponentBus</projectUrl>
+    <description>Blazor Component Bus enables the ability for page components to communicate through messaging using the pub/sub pattern.</description>
+    <tags>blazor, messaging,</tags>
+    <repository url="https://github.com/cpear/BlazorComponentBus" />
+    <dependencies>
+      <group targetFramework=".NETStandard2.0" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="C:\Projects\Colin\BlazorComponentBus\src\BlazorComponentBus\bin\Release\netstandard2.0\BlazorComponentBus.dll" target="lib\netstandard2.0\BlazorComponentBus.dll" />
+  </files>
+</package>

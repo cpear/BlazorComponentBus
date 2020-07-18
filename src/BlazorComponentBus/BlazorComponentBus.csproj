@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <Authors>Colin Pear</Authors>
+    <PackageId>BlazorComponentBus</PackageId>
+    <Product>Blazor Component Bus</Product>
+    <Description>Blazor Component Bus enables the ability for page components to communicate through messaging using the pub/sub pattern.</Description>
+    <Version>1.0.1</Version>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageProjectUrl>https://github.com/cpear/BlazorComponentBus</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/cpear/BlazorComponentBus</RepositoryUrl>
+    <PackageTags>blazor, messaging,</PackageTags>
+  </PropertyGroup>
+
+</Project>
