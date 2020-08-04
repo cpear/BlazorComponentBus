@@ -22,11 +22,11 @@ In your .NET Core app add the following line to make the ComponentBus available 
         services.AddScoped<ComponentBus>();
     }
 
-Next you will need to create message types. These are simple class files that can contain properties for passing information along with your to and from each component. The classes/objects are the messages that will be sent. The messages are the contracts that can be referenced by the components. The best practice is to create a contracts or messages folder for containg your messages.
+Next you will need to create message types. These are simple class files that can contain properties for passing information along to and from each component. The classes/objects are the messages that will be sent. The messages are the contracts that can be referenced by the components. The best practice is to create a contracts or messages folder for containg messages your component will emit.
 
 ![Screenshot](readme-img/example-contracts.png)
 
-An alternative approach would be to put your components and message contracts into separate projects.
+An alternative approach would be to put your components and message contracts into separate projects. I prefer this approach especially if your components are in their own projects.
 
 ![Screenshot](readme-img/example-contracts-project.png)
 
@@ -39,9 +39,9 @@ An example message might look like this:
 
 ## Subscribe to a message type
 
-Blazor Components you want to react to a specific message must subscribe to that type of message. In the example above the **SchoollRosterComponent** would subscribe to the **StudentAddedEvent**. 
+Blazor Components you create can react to events that are submitted by subscribing to them. In the example above the **SchoollRosterComponent** would subscribe to the **StudentAddedEvent**. 
 
-To subscribe to an event/message you must call Bus.Subscribe() and pass the message type, and a method you want called whenever a message of that type is published.
+To subscribe to an event/message you must call Bus.Subscribe(). This will let the message broker know what type of message your blazor component is subscribed to and what to do when it gets one (execute a callback to the subscribing component).
 
     @inject BlazorComponentBus.ComponentBus Bus
 
