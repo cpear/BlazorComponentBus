@@ -20,6 +20,11 @@ namespace BlazorComponentBus
             _componentRegistrants.Add(new KeyValuePair<Type, EventHandler<MessageArgs>>(messageType, callBack));
         }
 
+        public void Subscribe<T>(EventHandler<MessageArgs> callBack)
+        {
+            _componentRegistrants.Add(new KeyValuePair<Type, EventHandler<MessageArgs>>(typeof(T), callBack));
+        }
+
         public async Task Publish<T>(T message)
         {
             var messageType = typeof(T);
