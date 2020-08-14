@@ -1,6 +1,9 @@
 # BlazorComponentBus
 Enables loosely coupled messaging between Blazor Components.
 
+## Full Working Example
+For a full working example of using Blazor Component Bus (with source code) check out this Article on [Blazor UI Composition](https://clearmeasure.com/blazor-ui-composition/).
+
 ## Install BlazorComponentBus
 
 Install the [BlazorComponentBus](https://www.nuget.org/packages/BlazorComponentBus) nuget package to your Blazor Server project.
