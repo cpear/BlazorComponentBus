@@ -6,13 +6,13 @@
     <PackageId>BlazorComponentBus</PackageId>
     <Product>Blazor Component Bus</Product>
     <Description>Blazor Component Bus enables the ability for page components to communicate through messaging using the pub/sub pattern.</Description>
-    <Version>1.1.0</Version>
+    <Version>1.2.0</Version>
     <AssemblyVersion>1.0.0.0</AssemblyVersion>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageProjectUrl>https://github.com/cpear/BlazorComponentBus</PackageProjectUrl>
     <RepositoryUrl>https://github.com/cpear/BlazorComponentBus</RepositoryUrl>
     <PackageTags>blazor, messaging, events, pub, sub</PackageTags>
-    <FileVersion>1.1.0.0</FileVersion>
+    <FileVersion>1.2.0.0</FileVersion>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
   </PropertyGroup>
 
