@@ -16,7 +16,12 @@ namespace BlazorComponentBus
         {
             _registeredComponents.Add(new KeyValuePair<Type, ComponentCallBack<MessageArgs>>(typeof(T), componentCallBack));
         }
-
+        
+        public void UnSubscribe<T>(ComponentCallBack<MessageArgs> componentCallBack)
+        {
+            _registeredComponents.Remove(new KeyValuePair<Type, ComponentCallBack<MessageArgs>>(typeof(T), componentCallBack));
+        }
+        
         public async Task Publish<T>(T message)
         {
             var messageType = typeof(T);

@@ -18,6 +18,17 @@ namespace BlazorComponentBus.UnitTests
             Assert.Equal(1, subscriber.Count);
         }
 
+        [Fact]
+        public async Task ShouldUnsubscribe()
+        {
+            var bus = new ComponentBus();
+            var publisher = new PublishingComponent(bus);
+            var subscriber = new SubscribingComponent(bus);
+
+            await publisher.PublishEvent();
+
+            Assert.Equal(0, subscriber.Count);
+        }
     }
 
 
