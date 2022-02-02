@@ -139,6 +139,12 @@ namespace BlazorComponentBus.UnitTests
 
             subscriber.SubscribeThisComponent<TestEventMessage>(bus);
             subscriber.SubscribeThisComponent<TestEventMessage>(bus);
+            subscriber.SubscribeThisComponent<TestEventMessage>(bus);
+            subscriber.SubscribeThisComponent<TestEventMessage>(bus);
+            subscriber.SubscribeThisComponent<TestEventMessage>(bus);
+            subscriber.SubscribeThisComponent<TestEventMessage>(bus);
+            subscriber.SubscribeThisComponent<TestEventMessage>(bus);
+            subscriber.SubscribeThisComponent<TestEventMessage>(bus);
 
             await publisher.PublishTestMessageEvent();
 
