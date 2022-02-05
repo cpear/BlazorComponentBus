@@ -14,9 +14,18 @@ namespace BlazorComponentBus
 
         public void Subscribe<T>(ComponentCallBack<MessageArgs> componentCallBack)
         {
+            /* Unsubscribe first just in case the same component subscribes to the same callback twice.
+            This Prevents multiple callbacks to the same component. */
+            UnSubscribe<T>(componentCallBack);
+            
             _registeredComponents.Add(new KeyValuePair<Type, ComponentCallBack<MessageArgs>>(typeof(T), componentCallBack));
         }
-
+        
+        public void UnSubscribe<T>(ComponentCallBack<MessageArgs> componentCallBack)
+        {
+            _registeredComponents.Remove(new KeyValuePair<Type, ComponentCallBack<MessageArgs>>(typeof(T), componentCallBack));
+        }
+        
         public async Task Publish<T>(T message)
         {
             var messageType = typeof(T);
