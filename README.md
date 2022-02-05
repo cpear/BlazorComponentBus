@@ -1,9 +1,9 @@
 # BlazorComponentBus
 Enables loosely coupled messaging between Blazor UI Components. Yes! Thats right! UI messaging with Blazor Server.
 
-## Whats New
-v1.2.0 - Breaking change. :-(
-    I know. It sucks. But I modified the subscribe method so its less clumsy. If you are using a previous version you will need to update your calls where components subscribe to specific message types. Its a simple change and will be much cleaner. See the section _Subscribe to a message type_ below for the update.
+## Whats New v2.0.0
+ - Upgraded to .NET6
+ - Added the ability to Unsubscribe a component from a message
 
 ## Full Working Example
 For a full working example of using Blazor Component Bus (with source code) check out this Article on [Blazor UI Composition](https://clearmeasure.com/blazor-ui-composition/).
