@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace BlazorComponentBus
+﻿namespace BlazorComponentBus
 {
     public class MessageArgs : EventArgs
     {
