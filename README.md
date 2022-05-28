@@ -99,19 +99,19 @@ To publish a message you must call the Bus.Publish() method and pass in the mess
     
     @code
     {
-    protected override async Task OnInitializedAsync()
-    {
-    Bus.Subscribe<MyEvent>(DoSomething);
-    Bus.Subscribe<MyEvent>(DoSomethingAsync);
-    }
+        protected override async Task OnInitializedAsync()
+        {
+            Bus.Subscribe<MyEvent>(DoSomething);
+            Bus.Subscribe<MyEvent>(DoSomethingAsync);
+        }
 
-    private void DoSomething(MessageArgs args) 
-    {
-        // do something
-    }
+        private void DoSomething(MessageArgs args) 
+        {
+            // do something
+        }
 
-    private async Task DoSomethingAsync(MessageArgs args, CancellationToken ct) 
-    {
-        // await something
+        private async Task DoSomethingAsync(MessageArgs args, CancellationToken ct) 
+        {
+            // await something
+        }
     }
-}
