@@ -1,9 +1,10 @@
 # BlazorComponentBus
 Enables loosely coupled messaging between Blazor UI Components. Yes! Thats right! UI messaging with Blazor Server.
 
-## Whats New v2.0.0
- - Upgraded to .NET6
- - Added the ability to Unsubscribe a component from a message
+## Whats New in v2.1.0 (Thanks to [Chris Bush](https://github.com/cjbush)!)
+- Adds new async delegate so that Subscribe can handle an asynchronous callback
+- Extracts an IComponentBus interface so that that can be injected for testing/mocking purposes
+- Adds an extension project for Microsoft's DI framework to easily add BlazorComponentBus to an IServiceCollection
 
 ## Full Working Example
 For a full working example of using Blazor Component Bus (with source code) check out this Article on [Blazor UI Composition](https://clearmeasure.com/blazor-ui-composition/).
@@ -88,3 +89,29 @@ To publish a message you must call the Bus.Publish() method and pass in the mess
             Bus.Publish(new StudentAddedEvent{StudentId = new Guid()});
         }
     }
+
+
+## Async Callback Example
+
+
+    @inject BlazorComponentBus.IComponentBus Bus
+    <div>My Component</div>
+    
+    @code
+    {
+    protected override async Task OnInitializedAsync()
+    {
+    Bus.Subscribe<MyEvent>(DoSomething);
+    Bus.Subscribe<MyEvent>(DoSomethingAsync);
+    }
+
+    private void DoSomething(MessageArgs args) 
+    {
+        // do something
+    }
+
+    private async Task DoSomethingAsync(MessageArgs args, CancellationToken ct) 
+    {
+        // await something
+    }
+}

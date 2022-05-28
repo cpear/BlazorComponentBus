@@ -4,6 +4,14 @@
         <TargetFramework>net6.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
+        <PackageVersion>2.1.0</PackageVersion>
+        <Title>BlazorComponentBus</Title>
+        <Authors>Colin Pear</Authors>
+        <Description>Blazor Component Bus enables component to component communication using messaging and the pub/sub pattern.</Description>
+        <PackageProjectUrl>https://clearmeasure.com/blazor-ui-composition/</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/cpear/BlazorComponentBus</RepositoryUrl>
+        <Copyright>Colin Pear</Copyright>
+        <PackageLicenseUrl>https://github.com/cpear/BlazorComponentBus/blob/master/LICENSE</PackageLicenseUrl>
     </PropertyGroup>
 
 </Project>
