@@ -1,4 +1,4 @@
-using System;
+using System.Threading;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -13,9 +13,9 @@ namespace BlazorComponentBus.UnitTests
             var bus = new ComponentBus();
             var publisher = new PublishingComponent(bus);
             var subscriber = new SubscribingComponent();
-            
+
             subscriber.SubscribeThisComponent<TestEventMessage>(bus);
-            
+
             await publisher.PublishTestMessageEvent();
 
             Assert.Equal(1, subscriber.Count);
@@ -27,36 +27,40 @@ namespace BlazorComponentBus.UnitTests
             var bus = new ComponentBus();
             var publisher = new PublishingComponent(bus);
             var subscriber = new SubscribingComponent();
-            
+
             subscriber.SubscribeThisComponent<TestEventMessage>(bus);
-            
+
             subscriber.UnsubscribeThisComponent<TestEventMessage>(bus);
-            
+
             await publisher.PublishTestMessageEvent();
 
             Assert.Equal(0, subscriber.Count);
         }
-        
+
         [Fact]
         public void ShouldNotFailIfNoSubscriberFoundWhenUnsubscribing()
         {
             var bus = new ComponentBus();
             var subscriber = new SubscribingComponent();
-            
+
             //There is no subscriber but we are going to try an unsubscribe anyway
             subscriber.UnsubscribeThisComponent<TestEventMessage>(bus);
+
+            Assert.True(true);
         }
-        
+
         [Fact]
         public async Task ShouldNotFailIfPublishWithNoSubscribers()
         {
             var bus = new ComponentBus();
             var publisher = new PublishingComponent(bus);
-            
+
             //There is no subscriber but we are going to try and publish an event
             await publisher.PublishTestMessageEvent();
+
+            Assert.True(true);
         }
-        
+
         [Fact]
         public async Task ShouldOnlyUnsubscribeOneComponentAndNotAll()
         {
@@ -64,10 +68,10 @@ namespace BlazorComponentBus.UnitTests
             var publisher = new PublishingComponent(bus);
             var subscriber = new SubscribingComponent(); //Different Type
             var secondSubscriber = new SecondSubscribingComponent(); //Different Type
-            
+
             subscriber.SubscribeThisComponent<TestEventMessage>(bus);
             secondSubscriber.SubscribeThisComponent<TestEventMessage>(bus);
-            
+
             subscriber.UnsubscribeThisComponent<TestEventMessage>(bus);
 
             await publisher.PublishTestMessageEvent();
@@ -75,7 +79,7 @@ namespace BlazorComponentBus.UnitTests
             Assert.Equal(0, subscriber.Count);
             Assert.Equal(1, secondSubscriber.Count);
         }
-        
+
         [Fact]
         public async Task ShouldOnlyUnsubscribeOneComponentAndNotAllMultiInstance()
         {
@@ -83,10 +87,10 @@ namespace BlazorComponentBus.UnitTests
             var publisher = new PublishingComponent(bus);
             var subscriber = new SubscribingComponent(); //Same Type
             var secondSubscriber = new SubscribingComponent(); //Same Type
-            
+
             subscriber.SubscribeThisComponent<TestEventMessage>(bus);
             secondSubscriber.SubscribeThisComponent<TestEventMessage>(bus);
-            
+
             subscriber.UnsubscribeThisComponent<TestEventMessage>(bus);
 
             await publisher.PublishTestMessageEvent();
@@ -94,7 +98,7 @@ namespace BlazorComponentBus.UnitTests
             Assert.Equal(0, subscriber.Count);
             Assert.Equal(1, secondSubscriber.Count);
         }
-        
+
         [Fact]
         public async Task ShouldOnlyUnsubscribeOneEventType()
         {
@@ -104,15 +108,15 @@ namespace BlazorComponentBus.UnitTests
 
             subscriber.SubscribeThisComponent<TestEventMessage>(bus);
             subscriber.SubscribeThisComponent<AnotherTestEventMessage>(bus);
-            
+
             subscriber.UnsubscribeThisComponent<TestEventMessage>(bus);
 
             await publisher.PublishTestMessageEvent();
             await publisher.PublishAnotherTestEventMessage();
-            
+
             Assert.Equal(1, subscriber.Count);
         }
-        
+
         [Fact]
         public async Task ShouldSubscribeTo2Events()
         {
@@ -122,20 +126,70 @@ namespace BlazorComponentBus.UnitTests
 
             subscriber.SubscribeThisComponent<TestEventMessage>(bus);
             subscriber.SubscribeThisComponent<AnotherTestEventMessage>(bus);
-            
+
 
             await publisher.PublishTestMessageEvent();
             await publisher.PublishAnotherTestEventMessage();
-            
+
             Assert.Equal(2, subscriber.Count);
         }
-        
+
         [Fact]
         public async Task MultiSubscribeToSameMessageShouldOnlyGetOneResult()
         {
             var bus = new ComponentBus();
             var publisher = new PublishingComponent(bus);
             var subscriber = new SubscribingComponent();
+
+            subscriber.SubscribeThisComponent<TestEventMessage>(bus);
+            subscriber.SubscribeThisComponent<TestEventMessage>(bus);
+            subscriber.SubscribeThisComponent<TestEventMessage>(bus);
+            subscriber.SubscribeThisComponent<TestEventMessage>(bus);
+            subscriber.SubscribeThisComponent<TestEventMessage>(bus);
+            subscriber.SubscribeThisComponent<TestEventMessage>(bus);
+            subscriber.SubscribeThisComponent<TestEventMessage>(bus);
+            subscriber.SubscribeThisComponent<TestEventMessage>(bus);
+
+            await publisher.PublishTestMessageEvent();
+
+            Assert.Equal(1, subscriber.Count);
+        }
+
+        [Fact]
+        public async Task AsyncSubscribeShouldSubscribeToAndPublishAnEvent()
+        {
+            var bus = new ComponentBus();
+            var publisher = new PublishingComponent(bus);
+            var subscriber = new AsyncSubscribingComponent();
+
+            subscriber.SubscribeThisComponent<TestEventMessage>(bus);
+
+            await publisher.PublishTestMessageEvent();
+
+            Assert.Equal(1, subscriber.Count);
+        }
+
+        [Fact]
+        public async Task AsyncSubscribeShouldUnsubscribe()
+        {
+            var bus = new ComponentBus();
+            var publisher = new PublishingComponent(bus);
+            var subscriber = new AsyncSubscribingComponent();
+
+            subscriber.SubscribeThisComponent<TestEventMessage>(bus);
+            subscriber.UnsubscribeThisComponent<TestEventMessage>(bus);
+
+            await publisher.PublishTestMessageEvent();
+
+            Assert.Equal(0, subscriber.Count);
+        }
+
+        [Fact]
+        public async Task AsyncSubscribeMultiSubscribeToSameMessageShouldOnlyGetOneResult()
+        {
+            var bus = new ComponentBus();
+            var publisher = new PublishingComponent(bus);
+            var subscriber = new AsyncSubscribingComponent();
 
             subscriber.SubscribeThisComponent<TestEventMessage>(bus);
             subscriber.SubscribeThisComponent<TestEventMessage>(bus);
@@ -169,7 +223,7 @@ namespace BlazorComponentBus.UnitTests
         {
             await _bus.Publish(new TestEventMessage());
         }
-        
+
         public async Task PublishAnotherTestEventMessage()
         {
             await _bus.Publish(new AnotherTestEventMessage());
@@ -189,13 +243,34 @@ namespace BlazorComponentBus.UnitTests
         {
             bus.UnSubscribe<T>(ReceiveMessage);
         }
-        
+
         public void ReceiveMessage(MessageArgs args)
         {
             Count++;
         }
     }
-    
+
+    public class AsyncSubscribingComponent
+    {
+        public int Count { get; set; }
+
+        public void SubscribeThisComponent<T>(ComponentBus bus)
+        {
+            bus.Subscribe<T>(ReceiveMessageAsync);
+        }
+
+        public void UnsubscribeThisComponent<T>(ComponentBus bus)
+        {
+            bus.UnSubscribe<T>(ReceiveMessageAsync);
+        }
+
+        public Task ReceiveMessageAsync(MessageArgs args, CancellationToken ct)
+        {
+            Count++;
+            return Task.CompletedTask;
+        }
+    }
+
     public class SecondSubscribingComponent
     {
         public int Count { get; set; }
@@ -209,18 +284,18 @@ namespace BlazorComponentBus.UnitTests
         {
             bus.UnSubscribe<T>(ReceiveMessage);
         }
-        
+
         public void ReceiveMessage(MessageArgs args)
         {
             Count++;
         }
     }
-    
+
     public class TestEventMessage
     {
 
     }
-    
+
     public class AnotherTestEventMessage
     {
 

@@ -5,7 +5,9 @@ VisualStudioVersion = 17.0.32112.339
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorComponentBus", "BlazorComponentBus\BlazorComponentBus.csproj", "{9C12BC91-5860-4DE5-9F00-D4CE67E85A53}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorComponentBus.UnitTests", "BlazorComponentBus.UnitTests\BlazorComponentBus.UnitTests.csproj", "{7BC69FB0-6486-4E1A-A080-C7DD2B01EF8E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorComponentBus.UnitTests", "BlazorComponentBus.UnitTests\BlazorComponentBus.UnitTests.csproj", "{7BC69FB0-6486-4E1A-A080-C7DD2B01EF8E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorComponentBus.Extensions.DependencyInjection", "BlazorComponentBus.Extensions.DependencyInjection\BlazorComponentBus.Extensions.DependencyInjection.csproj", "{536D7AE4-6B77-4EE1-8D9B-10EDD3BBEECF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{7BC69FB0-6486-4E1A-A080-C7DD2B01EF8E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7BC69FB0-6486-4E1A-A080-C7DD2B01EF8E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7BC69FB0-6486-4E1A-A080-C7DD2B01EF8E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{536D7AE4-6B77-4EE1-8D9B-10EDD3BBEECF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{536D7AE4-6B77-4EE1-8D9B-10EDD3BBEECF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{536D7AE4-6B77-4EE1-8D9B-10EDD3BBEECF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{536D7AE4-6B77-4EE1-8D9B-10EDD3BBEECF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
