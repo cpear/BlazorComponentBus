@@ -1,5 +1,5 @@
 # BlazorComponentBus
-Enables loosely coupled messaging between Blazor UI Components. Yes! Thats right! UI messaging with Blazor Server.
+Enables loosely coupled messaging between Blazor UI Components. Yes! Thats right! UI messaging with Blazor.
 
 ## Whats New in v2.1.0 (Thanks to [Chris Bush](https://github.com/cjbush)!)
 - Adds new async delegate so that Subscribe can handle an asynchronous callback
@@ -11,7 +11,7 @@ For a full working example of using Blazor Component Bus (with source code) chec
 
 ## Install BlazorComponentBus
 
-Install the [BlazorComponentBus](https://www.nuget.org/packages/BlazorComponentBus) nuget package to your Blazor Server project.
+Install the [BlazorComponentBus](https://www.nuget.org/packages/BlazorComponentBus) nuget package to your Blazor project.
     
     Install-Package BlazorComponentBus
 
