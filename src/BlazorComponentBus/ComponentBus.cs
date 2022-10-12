@@ -10,8 +10,14 @@ public class ComponentBus : IComponentBus
     public void Subscribe<T>(ComponentCallBack<MessageArgs> componentCallback) =>
         Subscribe<T>(componentCallback as object);
 
+    public void SubscribeTo<T>(ComponentCallBack<T> componentCallback) =>
+        Subscribe<T>(componentCallback);
+
     public void Subscribe<T>(AsyncComponentCallBack<MessageArgs> componentCallback) =>
         Subscribe<T>(componentCallback as object);
+
+    public void SubscribeTo<T>(AsyncComponentCallBack<T> componentCallback) =>
+        Subscribe<T>(componentCallback);
 
     private void Subscribe<T>(object componentCallback)
     {
@@ -25,15 +31,23 @@ public class ComponentBus : IComponentBus
     public void UnSubscribe<T>(ComponentCallBack<MessageArgs> componentCallBack) =>
         UnSubscribe<T>(componentCallBack as object);
 
+    public void UnSubscribeFrom<T>(ComponentCallBack<T> componentCallback) =>
+        UnSubscribe<T>(componentCallback);
+
     public void UnSubscribe<T>(AsyncComponentCallBack<MessageArgs> componentCallBack) =>
         UnSubscribe<T>(componentCallBack as object);
+
+    public void UnSubscribeFrom<T>(AsyncComponentCallBack<T> componentCallback) =>
+        UnSubscribe<T>(componentCallback);
 
     private void UnSubscribe<T>(object componentCallBack)
     {
         _registeredComponents.Remove(new KeyValuePair<Type, object>(typeof(T), componentCallBack));
     }
 
-    public async Task Publish<T>(T message, CancellationToken ct = default)
+    public Task Publish<T>(T message) => Publish(message, CancellationToken.None);
+
+    public async Task Publish<T>(T message, CancellationToken ct)
     {
         var messageType = typeof(T);
 
@@ -49,9 +63,17 @@ public class ComponentBus : IComponentBus
             {
                 await Task.Run(() => syncCallback.Invoke(args), ct);
             }
+            else if (subscriber is ComponentCallBack<T> genericSyncCallback)
+            {
+                await Task.Run(() => genericSyncCallback.Invoke(message));
+            }
             else if (subscriber is AsyncComponentCallBack<MessageArgs> asyncCallback)
             {
                 await Task.Run(() => asyncCallback.Invoke(args, ct), ct);
+            }
+            else if (subscriber is AsyncComponentCallBack<T> genericAsyncCallback)
+            {
+                await Task.Run(() => genericAsyncCallback.Invoke(message, ct), ct);
             }
         }
 
